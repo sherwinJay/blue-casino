@@ -50,7 +50,7 @@ blockquote, q {
 
 /* Default Style */
 body{
-	background-color: #06111f;
+	background-color: #0c1929;
 	font-family: 'Catamaran', Arial, Helvetica, sans-serif;
 	color: #fff;
 }
@@ -73,7 +73,8 @@ input{
 	margin-left: 200px;
 }
 .page-container{
-	padding: 50px 80px;
+	padding: 50px 70px;
+	background-color: #06111F;
 }
 @media(max-width: 1400px){
 	body{
@@ -101,4 +102,9 @@ input{
 .featured-games .swiper-slide:hover .game_overlay {
 	opacity: 1;
 	z-index: 1;
+}
+@media(max-width: 1120px){
+	.main-container {
+		margin-left: 0;
+	}
 }
