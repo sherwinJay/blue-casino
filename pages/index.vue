@@ -43,7 +43,7 @@
         <div class="bonus-container">
           <h2 class="bonus">Bonuses</h2>
           <div class="bonus-img-wrapper">
-            <img src="/images/home/jackpot-bg.jpg">
+            <img src="/images/home/livecasino-promo-banner.png">
           </div>
         </div>
         <div class="more-games-wrapper">
@@ -268,7 +268,7 @@ export default {
 }
 .bonus-img-wrapper img{
   transition: transform .5s;
-  max-width: 75%;
+  max-width: 160%;
   left: 50%;
   position: absolute;
   top: 50%;
