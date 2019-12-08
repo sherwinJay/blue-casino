@@ -42,30 +42,20 @@
       <div class="home-content">
         <div class="bonus-container">
           <h2 class="bonus">Bonuses</h2>
-          <div class="bonus-img-wrapper">
+          <nuxt-link to="/promotion" class="bonus-img-wrapper">
             <img src="/images/home/livecasino-promo-banner.png">
-          </div>
+          </nuxt-link>
         </div>
         <div class="more-games-wrapper">
           <h2 class="more-games">More Games</h2>
           <div class="game-pages">
-            <div class="gm-img-wrapper">
-              <img src="/images/home/sports2.jpg">
-            </div>
-            <div class="gm-img-wrapper">
-              <img src="/images/home/casino.jpg">
-            </div>
-            <div class="gm-img-wrapper">
-              <img src="/images/home/slots.jpg">
-            </div>
-            <div class="gm-img-wrapper">
-              <img src="/images/home/lottery.jpg">
-            </div>
-            <div class="gm-img-wrapper">
-              <img src="/images/home/fishing.jpg">
-            </div>
-            <div class="gm-img-wrapper">
-              <img src="/images/home/cards.jpg">
+            <div
+              v-for="(otherPage, idx) in otherPages"
+              :key="idx"
+              class="gm-img-wrapper">
+              <nuxt-link :to="otherPage.link">
+               <img :src="`/images/home/${otherPage.src}`">
+              </nuxt-link>
             </div>
           </div>
         </div>
@@ -101,6 +91,14 @@ export default {
         { src: 'epa.jpg', name: 'Epic Ape' },
         { src: 'SMG_shogunofTime.jpg', name: 'Shogun Of Time' },
         { src: '142.jpg', name: 'Hephaestus' }
+      ],
+      otherPages: [
+        { src: 'sports2.jpg', link: '/sports' },
+        { src: 'casino.jpg', link: '/casino' },
+        { src: 'slots.jpg', link: '/slots' },
+        { src: 'lottery.jpg', link: '/lottery' },
+        { src: 'fishing.jpg', link: '/fishing' },
+        { src: 'cards.jpg', link: '/cards' }
       ]
     }
   },
@@ -215,6 +213,7 @@ export default {
   border-radius: 7px;
 }
 .bonus-img-wrapper{
+  display: block;
   height: 300px;
   background-color: #000;
 }
@@ -299,41 +298,6 @@ export default {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.home-promo-wrapper{
-  background: url(/images/home/promotions/promo-bg.png) #06111F;
-}
-.home-promo{
-  display: grid;
-  grid: auto / repeat(4, 1fr);
-  grid-gap: 20px;
-  margin-top: 45px;
-}
-.home-promo > div{
-  max-width: 100%;
-  overflow: hidden;
-}
-.home-promo > div img{
-  max-width: 100%;
-  border-radius: 10px;
-}
-.promo-content{
-  padding: 7px 0;
-}
-.promo-content h3{
-  font-size: 18px;
-  color: #fdea7f;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-.promo-btn{
-  padding: 5px 9px;
-  background-color: #e8b238;
-  color: #111;
-  margin-top: 10px;
-  border-radius: 15px;
-  display: inline-block;
-  font-size: 14px;
-}
 @media(max-width: 1500px){
 .game-grid-container{
   display: grid;
@@ -385,6 +349,9 @@ export default {
   .box_content.winners{
     max-height: 216px;
     overflow: hidden;
+  }
+  .bonus-img-wrapper img {
+    max-width: 175%;
   }
 }
 @media(max-width: 1120px){

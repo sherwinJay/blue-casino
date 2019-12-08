@@ -61,6 +61,15 @@ h1,h2,h3{
 	font-family: 'Archivo';
 	color: #fff;
 }
+h1{
+	font-size:32px;
+}
+h2{
+	font-size:28px;
+}
+h3{
+	font-size:25px;
+}
 a, a:hover{
 	text-decoration: none;
 	color: #fff;
