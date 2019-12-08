@@ -75,23 +75,6 @@
         </div>
       </div>
     </section>
-    <section class="page-container home-promo-wrapper">
-      <h2>Promotions</h2>
-      <div class="home-promo">
-        <div
-         v-for="(promo, idx) in promotions"
-          :key="idx">
-          <img :src="`/images/home/promotions/${promo.src}`">
-          <div class="promo-content">
-            <h3>{{ promo.title }}</h3>
-            <p>
-              {{ promo.content }}
-            </p>
-            <a class="promo-btn" href="#">查看详情</a>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 <script>
@@ -118,12 +101,6 @@ export default {
         { src: 'epa.jpg', name: 'Epic Ape' },
         { src: 'SMG_shogunofTime.jpg', name: 'Shogun Of Time' },
         { src: '142.jpg', name: 'Hephaestus' }
-      ],
-      promotions: [
-        { src: 'promo_banner_02.jpg', title: 'Title', content: `Your lucky weekend? Find yourself on a 10x Blackjack winning streak this weekend and you'll be receiving $100!` },
-        { src: 'promo_banner_03.jpg', title: 'Title', content: `Your lucky weekend? Find yourself on a 10x Blackjack winning streak this weekend and you'll be receiving $100!` },
-        { src: 'promo_banner_04.jpg', title: 'Title', content: `Your lucky weekend? Find yourself on a 10x Blackjack winning streak this weekend and you'll be receiving $100!` },
-        { src: 'promo_banner_01.jpg', title: 'Title', content: `Your lucky weekend? Find yourself on a 10x Blackjack winning streak this weekend and you'll be receiving $100!` }
       ]
     }
   },
