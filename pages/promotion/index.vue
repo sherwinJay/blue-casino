@@ -29,7 +29,7 @@ export default {
         { src: 'promo_banner_04.jpg', title: 'Title', content: `Your lucky weekend? Find yourself on a 10x Blackjack winning streak this weekend and you'll be receiving $100!` },
         { src: 'promo_banner_01.jpg', title: 'Title', content: `Your lucky weekend? Find yourself on a 10x Blackjack winning streak this weekend and you'll be receiving $100!` },
         { src: 'livecasino-promo-banner.png', title: 'Title', content: `Your lucky weekend? Find yourself on a 10x Blackjack winning streak this weekend and you'll be receiving $100!` },
-        { src: 'promo_banner_04.jpg', title: 'Title', content: `Your lucky weekend? Find yourself on a 10x Blackjack winning streak this weekend and you'll be receiving $100!` }
+        { src: 'promo_banner_05_V4.jpg', title: 'Title', content: `Your lucky weekend? Find yourself on a 10x Blackjack winning streak this weekend and you'll be receiving $100!` }
       ]
     }
   }

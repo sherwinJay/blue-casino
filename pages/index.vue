@@ -37,7 +37,7 @@
     <section class="page-container">
       <div class="jackpot-container">
         <h2>Jackpot</h2>
-        <p>¥ 1,501,148.72</p>
+        <p id="our-jackpot">{{ this.jackpotPrize }}</p>
       </div>
       <div class="home-content">
         <div class="bonus-container">
@@ -99,7 +99,31 @@ export default {
         { src: 'lottery.jpg', link: '/lottery' },
         { src: 'fishing.jpg', link: '/fishing' },
         { src: 'cards.jpg', link: '/cards' }
-      ]
+      ],
+      jackpotPrize: '1501480'
+    }
+  },
+  created () {
+    this.jackpotPrizes()
+  },
+  methods: {
+    jackpotPrizes () {
+      let defVal = 1501124
+      // const jackpot = document.getElementById('our-jackpot')
+      setInterval(() => {
+        defVal = parseInt(defVal)
+        defVal += 3
+
+        const centRand = Math.floor((Math.random() * 90) + 11)
+        this.jackpotPrize = `¥ ${numberWithCommas(defVal)}.${centRand}`
+      }, 1000)
+
+      function numberWithCommas (x) {
+        const parts = x.toString().split('.')
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        return parts.join('.')
+      }
+      // console.log(this.jackpotPrize)
     }
   },
   components: {
@@ -355,22 +379,22 @@ export default {
   }
 }
 @media(max-width: 1120px){
-.game-grid-container{
-  display: grid;
-  grid: 120px 120px 120px 120px/ repeat(5, 1fr);
-  grid-gap: 15px;
-  min-height: 0;
-  min-width: 0;
-}
-.game-grid-container > div:first-child{
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 3;
-  min-width: 0;
-  overflow:hidden;
-  width: 100%;
-}
+  .game-grid-container{
+    display: grid;
+    grid: 120px 120px 120px 120px/ repeat(5, 1fr);
+    grid-gap: 15px;
+    min-height: 0;
+    min-width: 0;
+  }
+  .game-grid-container > div:first-child{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    min-width: 0;
+    overflow:hidden;
+    width: 100%;
+  }
   .thumbnail img{
     max-width: 190%;
   }
