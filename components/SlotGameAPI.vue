@@ -57,6 +57,9 @@ export default {
   },
   created () {
     this.getGames(this.currVendor, this.currCategory, 0, this.maxItem)
+    // window.addEventListener('scroll', () => {
+    //   this.loadMore = this.bottomPage()
+    // })
   },
   methods: {
     // get data from api
@@ -65,10 +68,9 @@ export default {
         method: 'GET' })
         .then(response => response.json())
         .then((result) => {
-          // this.games = result.game_list;
           this.loading = false
           const showGames = result.game_list.filter((idx) => {
-            return idx.in_flash === 1 && idx.game_type_code !== 'unknown'
+            return idx.in_flash === '1' && idx.game_type_code !== 'unknown'
           })
           const append = showGames.slice(gameLength, (gameLength + maxItems))
           this.games = this.games.concat(append)
@@ -77,6 +79,20 @@ export default {
           //   this.games.concat(append)
           // }
         })
+    },
+    bottomPage () {
+      const scrollY = window.scrollY
+      const visible = document.documentElement.clientHeight
+      const pageHeight = document.documentElement.scrollHeight
+      const bottomOfPage = visible + scrollY >= (pageHeight - 120)
+      return bottomOfPage || pageHeight < visible
+    }
+  },
+  watch: {
+    loadMore (bottom) {
+      if (bottom) {
+        this.getGames(this.currVendor, this.currCategory, this.games.length, this.maxItem)
+      }
     }
   },
   components: {

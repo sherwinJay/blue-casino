@@ -1,11 +1,30 @@
 <template>
-  <div>
-    <div>
-      <p
+    <div class="game-container">
+      <div
+        class="game-slot-container"
         v-for="(game, idx) in filterGames"
-        :key="idx">{{game.game_name}}</p>
+        :key="idx">
+        <img :src="game.gameImg"/>
+        <div class="game-info">
+          <span
+            class="game-name">
+            {{ game.game_name }}
+          </span>
+          <div class="btn-wrapper">
+            <a
+              class="btn play-btn"
+              href="#">
+              {{game.realBtn}}
+            </a>
+            <a
+              class="btn demo-btn"
+              href="#">
+              {{game.demoBtn}}
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 </template>
 <script>
 export default {
@@ -92,5 +111,76 @@ export default {
 }
 </script>
 <style scoped>
-
+  .game-container{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 20px;
+    min-height: 0;
+    min-width: 0;
+  }
+.game-container .game-slot-container{
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 5px;
+}
+.game-container .game-slot-container img {
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+  max-width: 175%;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  z-index: 0;
+}
+.game-info{
+  position: relative;
+  opacity: 0;
+  height: 100%;
+  padding: 20px 0;
+  background: rgba(0,0,0,0.7);
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  transition: 0.5s all ease-in-out;
+  text-align: center;
+}
+.game-info:hover{
+  opacity: 1;
+}
+.btn-wrapper{
+  display: grid;
+}
+.btn-wrapper .btn{
+  margin: 5px 0;
+}
+@media(max-width: 1500px){
+   .game-container{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 15px;
+    min-height: 0;
+    min-width: 0;
+  }
+  .game-container .game-slot-container img{
+    max-width: 190%;
+  }
+  .game-container .game-slot-container{
+    height: 130px;
+  }
+  .btn-wrapper .btn{
+    padding: 2px 20px;
+    font-size: 14px;
+    margin: 3px 0;
+  }
+  .game-info{
+    line-height: 20px;
+    padding: 10px 0;
+  }
+}
 </style>
