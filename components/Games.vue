@@ -5,7 +5,7 @@
         v-for="(game, idx) in filterGames"
         :key="idx">
         <img :src="game.gameImg"/>
-        <div class="game-info">
+        <div :class="`game-info ${game.gameVendor}`">
           <span
             class="game-name">
             {{ game.game_name }}
@@ -13,12 +13,12 @@
           <div class="btn-wrapper">
             <a
               class="btn play-btn"
-              href="#">
+              :href="game.game_link.real">
               {{game.realBtn}}
             </a>
             <a
               class="btn demo-btn"
-              href="#">
+              :href="game.game_link.trial">
               {{game.demoBtn}}
             </a>
           </div>
@@ -57,12 +57,12 @@ export default {
         //   }
 
           // modify gamelink
-          const getGameLink = (gameProvider, gameCode, gameType, gameMode, gameCodeOther) => {
-            const getLaunchUrl1 = String(idx.game_launch_url.web).split('/')[0]
-            const getLaunchUrl2 = String(idx.game_launch_url.web).split('/')[1]
-
+          const getLaunchUrl1 = String(idx.game_launch_url.web).split('/')[0]
+          const getLaunchUrl2 = String(idx.game_launch_url.web).split('/')[1]
+          const getGameLinkReal = (gameProvider, gameCode, gameType, gameMode, gameCodeOther) => {
+            // Use provider_code when comparing with gameProvider
             if (gameProvider === 'T1PT') {
-              return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}/${gameMode}`
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}`
             } else if (gameProvider === 'T1JUMB') {
               if (idx.game_type_code === 'card_games') {
                 return `/${getLaunchUrl1}/${getLaunchUrl2}/table_and_cards/${gameCode}`
@@ -71,6 +71,63 @@ export default {
               } else {
                 return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameType}/${gameCode}`
               }
+            } else if (gameProvider === 'T1PNG') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}/real`
+            } else if (gameProvider === 'PT V2') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/default/${gameCode}`
+            } else if (gameProvider === 'MGPLUS') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/5213/${gameCode}/real`
+            } else if (gameProvider === 'HB') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/real/${gameCode}`
+            } else if (gameProvider === 'DT') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}/real/web`
+            } else if (gameProvider === 'JUMB_GAMING') {
+              if (idx.game_type_code === 'card_games') {
+                return `/${getLaunchUrl1}/${getLaunchUrl2}/table_and_cards/${gameCode}/real/desktop`
+              } else if (idx.game_type_code === 'fishing_game') {
+                return `/${getLaunchUrl1}/${getLaunchUrl2}/fishing/${gameCode}/real/desktop`
+              } else {
+                return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameType}/${gameCode}`
+              }
+            } else if (gameProvider === 'PRAGMATICPLAY') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}/real`
+            } else {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}`
+            }
+          }
+
+          const getGameLinkTrial = (gameProvider, gameCode, gameType, gameMode, gameCodeOther) => {
+            // Use provider_code when comparing with gameProvider
+            if (gameProvider === 'T1PT') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}`
+            } else if (gameProvider === 'T1JUMB') {
+              if (idx.game_type_code === 'card_games') {
+                return `/${getLaunchUrl1}/${getLaunchUrl2}/table_and_cards/${gameCode}`
+              } else if (idx.game_type_code === 'fishing_game') {
+                return `/${getLaunchUrl1}/${getLaunchUrl2}/fishing/${gameCode}`
+              } else {
+                return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameType}/${gameCode}`
+              }
+            } else if (gameProvider === 'T1PNG') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}/fun`
+            } else if (gameProvider === 'PT V2') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/default/${gameCode}`
+            } else if (gameProvider === 'MGPLUS') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/5213/${gameCode}`
+            } else if (gameProvider === 'HB') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/trial/${gameCode}`
+            } else if (gameProvider === 'DT') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}`
+            } else if (gameProvider === 'JUMB_GAMING') {
+              if (idx.game_type_code === 'card_games') {
+                return `/${getLaunchUrl1}/${getLaunchUrl2}/table_and_cards/${gameCode}/trial`
+              } else if (idx.game_type_code === 'fishing_game') {
+                return `/${getLaunchUrl1}/${getLaunchUrl2}/fishing/${gameCode}/trial`
+              } else {
+                return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameType}/${gameCode}`
+              }
+            } else if (gameProvider === 'PRAGMATICPLAY') {
+              return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}/fun`
             } else {
               return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}`
             }
@@ -78,15 +135,28 @@ export default {
 
           const gName = this.langCN ? idx.game_name_cn : idx.game_name_en
           const gImgPath = this.langCN ? `/gamegatewayincludes/images/cn/` : `/gamegatewayincludes/images/`
+          const hideDemoBtn = []
 
+          function vendorNoDemo () {
+            if (hideDemoBtn.length < 1) {
+              return false
+            } else {
+              for (let i = 0; i < hideDemoBtn.length; i++) {
+                if (hideDemoBtn[i] === idx.provider_code) {
+                  return true
+                }
+              }
+            }
+          }
           // create new game list data
           newArr.push({
+            gameVendor: idx.provider_code,
             game_name: gName,
             game_url: `${gImgPath}${idx.game_id_desktop}`,
             gameImg: this.langCN ? idx.image_path.cn : idx.image_path.en,
             game_link: {
-              real: `${getGameLink(game[0].provider_code, idx.game_id_desktop, idx.game_type_code, 'real')}`,
-              trial: `${getGameLink(game[0].provider_code, idx.game_id_desktop, idx.game_type_code, 'trial')}`
+              real: `${getGameLinkReal(game[0].provider_code, idx.game_id_desktop, idx.game_type_code)}`,
+              trial: `${getGameLinkTrial(game[0].provider_code, idx.game_id_desktop, idx.game_type_code)}`
             },
             is_flash: ``,
             is_html5: ``,
@@ -94,7 +164,7 @@ export default {
             category: ``,
             gameCode: idx.game_type_code,
             realBtn: this.langCN ? '开始游戏' : 'real',
-            demoBtn: this.langCN ? '免费试玩' : 'trial'
+            demoBtn: vendorNoDemo() ? '' : this.langCN ? '免费试玩' : 'trial'
           })
         })
         console.log(newArr)

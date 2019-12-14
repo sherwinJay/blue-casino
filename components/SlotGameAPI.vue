@@ -6,13 +6,18 @@
           v-for="vendor in gameVendor"
           :key="vendor.id">
           <a
-            :class="{active: currVendor == vendor.id}"
+            :class="{active: currVendor === vendor.id}"
             :data-id="vendor.id">
             {{ vendor.name }}
           </a>
         </li>
       </ul>
     </div>
+    <!-- <GameCategories
+      class="col-md-8"
+      :categories="this.categories"
+      :activeCategory="this.currCategory"
+      :switchCategory="this.switchCategory"/> -->
     <div class="game-container">
       <div
         v-if="loading"
@@ -38,6 +43,7 @@
 </template>
 <script>
 import Games from '~/components/Games'
+// import GameCategories from '~/components/GameCategories'
 export default {
   data () {
     return {
@@ -48,6 +54,8 @@ export default {
         { name: 'Playtech', id: 1002 },
         { name: 'Pragmatic', id: 1011 },
         { name: 'Top Trend Gaming', id: 1012 }
+        // {name: "Microgaming", id: 5213},
+        // {name: "Jumbo", id: 1018}
       ],
       langCN: false,
       maxItem: 15,
@@ -57,9 +65,15 @@ export default {
   },
   created () {
     this.getGames(this.currVendor, this.currCategory, 0, this.maxItem)
-    // window.addEventListener('scroll', () => {
-    //   this.loadMore = this.bottomPage()
-    // })
+    // this.getCategories(this.currVendor)
+  },
+  beforeMount () {
+    window.addEventListener('scroll', () => {
+      this.loadMore = this.bottomPage()
+    })
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.bottomPage)
   },
   methods: {
     // get data from api
@@ -74,20 +88,36 @@ export default {
           })
           const append = showGames.slice(gameLength, (gameLength + maxItems))
           this.games = this.games.concat(append)
-          // if (this.bottomPage()) {
-          //   this.loadMore = false
-          //   this.games.concat(append)
-          // }
+          if (this.bottomPage()) {
+            this.loadMore = false
+            this.games.concat(append)
+          }
         })
     },
     bottomPage () {
       const scrollY = window.scrollY
       const visible = document.documentElement.clientHeight
       const pageHeight = document.documentElement.scrollHeight
-      const bottomOfPage = visible + scrollY >= (pageHeight - 120)
+      const bottomOfPage = visible + scrollY >= (pageHeight)
       return bottomOfPage || pageHeight < visible
     }
+    // getCategories (id) {
+    //   fetch(`http://player.onestop.t1t.in/pub/get_frontend_games/${id}/game_type`, {
+    //     method: 'GET' })
+    //     .then(response => response.json())
+    //     .then((result) => {
+    //       this.categories = result.available_game_type_codes
+    //       console.log(this.categories)
+    //     })
+    // }
   },
+  // switchCategory (e) {
+  //   // get current category
+  //   this.games = []
+  //   this.loading = true
+  //   this.currCategory = e.target.getAttribute('data-category')
+  //   this.getGames(this.currVendor, this.currCategory, 0, this.maxItem)
+  // },
   watch: {
     loadMore (bottom) {
       if (bottom) {
@@ -97,6 +127,7 @@ export default {
   },
   components: {
     Games
+    // GameCategories
   }
 }
 </script>
