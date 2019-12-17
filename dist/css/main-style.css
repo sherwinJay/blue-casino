@@ -57,6 +57,15 @@ body{
 ul,ol{
 	list-style: none;
 }
+button:focus,
+input:focus{
+	outline:none;
+}
+input{
+	color: #000;
+	
+}
+
 h1,h2,h3{
 	font-family: 'Archivo';
 	color: #fff;

@@ -66,6 +66,10 @@ a, a:hover{
 }
 input{
 	color: #000;
+	
+}
+input:focus{
+  outline:none;
 }
 /* Global Styles */
 .main-container {
@@ -73,6 +77,7 @@ input{
 }
 .page-container{
 	padding: 50px 60px;
+	position: relative;
 }
 @media(max-width: 1400px){
 	.page-container{

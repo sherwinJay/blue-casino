@@ -1,7 +1,6 @@
 <template>
   <div class="main-container">
     <div class="page-container">
-      <h1>Slots</h1>
       <Slots />
     </div>
   </div>

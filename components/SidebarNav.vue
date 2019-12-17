@@ -3,7 +3,7 @@
     <div class="sidebar-nav">
       <div class="gm-lang">
       <ul>
-        <li>CN</li>
+        <li>EN</li>
         <!-- <li>EN</li> -->
       </ul>
       <!-- <select>

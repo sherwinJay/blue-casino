@@ -11,10 +11,10 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_workbox_11f63425 from 'nuxt_plugin_workbox_11f63425' // Source: .\\workbox.js (mode: 'client')
-import nuxt_plugin_nuxticons_104d219f from 'nuxt_plugin_nuxticons_104d219f' // Source: .\\nuxt-icons.js (mode: 'all')
-import nuxt_plugin_bootstrapvue_2b691b10 from 'nuxt_plugin_bootstrapvue_2b691b10' // Source: .\\bootstrap-vue.js (mode: 'all')
-import nuxt_plugin_axios_8928256e from 'nuxt_plugin_axios_8928256e' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_workbox_767c4ce5 from 'nuxt_plugin_workbox_767c4ce5' // Source: .\\workbox.js (mode: 'client')
+import nuxt_plugin_nuxticons_214750df from 'nuxt_plugin_nuxticons_214750df' // Source: .\\nuxt-icons.js (mode: 'all')
+import nuxt_plugin_bootstrapvue_d6e80990 from 'nuxt_plugin_bootstrapvue_d6e80990' // Source: .\\bootstrap-vue.js (mode: 'all')
+import nuxt_plugin_axios_78213609 from 'nuxt_plugin_axios_78213609' // Source: .\\axios.js (mode: 'all')
 import nuxt_plugin_vueawesomeswiper_0e14f460 from 'nuxt_plugin_vueawesomeswiper_0e14f460' // Source: ..\\plugins\\vue-awesome-swiper (mode: 'client')
 
 // Component: <ClientOnly>
@@ -149,20 +149,20 @@ async function createApp (ssrContext) {
 
   // Plugin execution
 
-  if (process.client && typeof nuxt_plugin_workbox_11f63425 === 'function') {
-    await nuxt_plugin_workbox_11f63425(app.context, inject)
+  if (process.client && typeof nuxt_plugin_workbox_767c4ce5 === 'function') {
+    await nuxt_plugin_workbox_767c4ce5(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_nuxticons_104d219f === 'function') {
-    await nuxt_plugin_nuxticons_104d219f(app.context, inject)
+  if (typeof nuxt_plugin_nuxticons_214750df === 'function') {
+    await nuxt_plugin_nuxticons_214750df(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_bootstrapvue_2b691b10 === 'function') {
-    await nuxt_plugin_bootstrapvue_2b691b10(app.context, inject)
+  if (typeof nuxt_plugin_bootstrapvue_d6e80990 === 'function') {
+    await nuxt_plugin_bootstrapvue_d6e80990(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_8928256e === 'function') {
-    await nuxt_plugin_axios_8928256e(app.context, inject)
+  if (typeof nuxt_plugin_axios_78213609 === 'function') {
+    await nuxt_plugin_axios_78213609(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_vueawesomeswiper_0e14f460 === 'function') {

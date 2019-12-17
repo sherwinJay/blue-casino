@@ -13,7 +13,8 @@
           <div class="btn-wrapper">
             <a
               class="btn play-btn"
-              :href="game.game_link.real">
+              :href="game.game_link.real"
+              target="_blank">
               {{game.realBtn}}
             </a>
             <a
@@ -31,6 +32,12 @@ export default {
   props: {
     gameData: {
       type: Array
+    },
+    searchGame: {
+      type: String
+    },
+    langCN: {
+      type: Boolean
     }
   },
   computed: {
@@ -174,20 +181,20 @@ export default {
     filterGames () {
       return this.slotGames.filter((game) => {
         const filteredGame = game.game_name.toLowerCase()
-        return filteredGame
+        return filteredGame.match(this.searchGame.toLowerCase())
       })
     }
   }
 }
 </script>
 <style scoped>
-  .game-container{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 20px;
-    min-height: 0;
-    min-width: 0;
-  }
+.game-container{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 20px;
+  min-height: 0;
+  min-width: 0;
+}
 .game-container .game-slot-container{
   height: 160px;
   overflow: hidden;

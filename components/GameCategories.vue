@@ -24,6 +24,16 @@ export default {
   computed: {
     createCategories () {
       const newCategories = []
+      // function getSlots () {
+      //   for (let i = 0; i < this.categories.length; i++) {
+      //     if (this.categories[i] === 'slots') {
+      //       return this.categories.splice(i, 1)
+      //     }
+      //   }
+      // }
+      // console.log(getSlots)
+      // if (this.categories[0] !== 'slots') {
+      // }
       this.categories.map((idx) => {
         if (idx === null) {
           return test
@@ -58,3 +68,21 @@ export default {
   }
 }
 </script>
+<style scoped>
+.game-categories li{
+  display: inline-block;
+  margin-right: 10px;
+}
+.game-categories li button{
+  background-color: transparent;
+  color: #fff;
+  border: 0;
+  padding: 5px 15px;
+}
+.game-categories li button:hover,
+.game-categories li button.active{
+  background-color: #e8b238;
+  color: #000;
+  border-radius: 15px;
+}
+</style>
