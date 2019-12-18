@@ -7,10 +7,10 @@
           :key="vendor.id">
           <a
             href="#"
-            :class="{active: currVendor === vendor.id}"
+            :id="`game-${vendor.id}`"
+            :class="{active: currVendor == vendor.id}"
             @click="switchVendor"
             :data-id="vendor.id">
-            {{ vendor.name }}
           </a>
         </li>
       </ul>
@@ -101,7 +101,7 @@ export default {
         .then((result) => {
           this.loading = false
           const showGames = result.game_list.filter((idx) => {
-            return idx.in_flash === '1' && idx.game_type_code !== 'unknown'
+            return (idx.in_flash === '1' || idx.in_html5 === '1') && idx.game_type_code !== 'unknown'
           })
           const append = showGames.slice(gameLength, (gameLength + maxItems))
           this.games = this.games.concat(append)
@@ -212,7 +212,7 @@ border-top-color: #ccc;
 .load-more #loading .circle{
   width: 40px;
   height: 40px;
-  margin-top: 35px;
+  margin-top: 175px;
 }
 .search-game input{
   padding: 5px 12px;
@@ -225,13 +225,39 @@ border-top-color: #ccc;
 }
 .game-vendor{
   padding: 10px 20px;
-  border-radius: 25px;
+  border-radius: 45px;
   background-color: #0c1929;
   margin-bottom: 30px;
 }
 .game-vendor li{
   display: inline-block;
-  padding: 5px 12px;
+  padding: 5px 20px;
+}
+.game-vendor li a{
+  background: url(/images/slots-page/vendor/game-providers.png) no-repeat;
+  filter: grayscale(100%);
+  display: block;
+  height: 45px;
+}
+.game-vendor li a:hover,
+.game-vendor li a.active{
+  filter: grayscale(0);
+}
+.game-vendor li a#game-1002{
+  background-position: -1439px;
+  width: 125px;
+}
+.game-vendor li a#game-1011{
+  background-position: -1337px;
+  width: 95px;
+}
+.game-vendor li a#game-1012{
+  background-position: -2429px;
+  width: 155px;
+}
+.game-vendor li a#game-1010{
+  background-position: -415px;
+  width: 105px;
 }
 @-webkit-keyframes spin {
 100% {
@@ -243,10 +269,12 @@ border-top-color: #ccc;
   -webkit-transform: rotate(360deg);
 }
 }
-@media (min-width: 992px) {
+@media (max-width: 1500px) {
   #loading {
     display: block;
   }
-
+  .load-more #loading .circle{
+    margin-top: 35px;
+  }
 }
 </style>

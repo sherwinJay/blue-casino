@@ -3,7 +3,10 @@
       <div
         class="game-slot-container"
         v-for="(game, idx) in filterGames"
-        :key="idx">
+        :key="idx"
+        data-aos="fade-up"
+        data-aos-delay="500"
+        data-aos-once="true">
         <img :src="game.gameImg"/>
         <div :class="`game-info ${game.gameVendor}`">
           <span
@@ -188,6 +191,13 @@ export default {
 }
 </script>
 <style scoped>
+.game-slot-container{
+     animation: popIn 0.5s;
+}
+@keyframes popIn {
+    from {transform: scale(0.8); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+}
 .game-container{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -200,6 +210,7 @@ export default {
   overflow: hidden;
   position: relative;
   border-radius: 5px;
+  animation: popIn 0.5s;
 }
 .game-container .game-slot-container img {
   -webkit-transition: -webkit-transform .5s;
