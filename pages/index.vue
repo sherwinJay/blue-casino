@@ -11,7 +11,10 @@
     <section class="home-games page-container">
       <div class="game-grid-container">
         <div class="gm-day-wrapper">
-            <img src="/images/home/DesertTreasure.jpg">
+            <img
+              src="/images/home/DesertTreasure.jpg"
+              alt="Dessert Treasure"
+            >
         </div>
         <div
           v-for="(thumbnail, idx) in thumbnails"
@@ -19,7 +22,10 @@
           class="thumbnail">
           <!-- <span class="hot">HOT</span> -->
           <!-- <span class="hot-text">HOT</span> -->
-          <img :src="`/images/home/featured-games/${thumbnail.src}`">
+          <img
+            :src="`/images/home/featured-games/${thumbnail.src}`"
+            :alt="thumbnail.name"
+          >
           <div class="game_overlay">
             <p>{{thumbnail.name}}</p>
             <a href="#">
@@ -43,7 +49,10 @@
         <div class="bonus-container">
           <h2 class="bonus">Bonuses</h2>
           <nuxt-link to="/promotion" class="bonus-img-wrapper">
-            <img src="/images/home/livecasino-promo-banner.png">
+            <img
+              src="/images/home/livecasino-promo-banner.png"
+              alt="Live Casino Promo"
+            >
           </nuxt-link>
         </div>
         <div class="more-games-wrapper">
@@ -54,7 +63,10 @@
               :key="idx"
               class="gm-img-wrapper">
               <nuxt-link :to="otherPage.link">
-               <img :src="`/images/home/${otherPage.src}`">
+               <img
+                :src="`/images/home/${otherPage.src}`"
+                :alt="otherPage.name"
+              >
               </nuxt-link>
             </div>
           </div>
@@ -93,12 +105,12 @@ export default {
         { src: '142.jpg', name: 'Hephaestus' }
       ],
       otherPages: [
-        { src: 'sports2.jpg', link: '/sports' },
-        { src: 'casino.jpg', link: '/casino' },
-        { src: 'slots.jpg', link: '/slots' },
-        { src: 'lottery.jpg', link: '/lottery' },
-        { src: 'fishing.jpg', link: '/fishing' },
-        { src: 'cards.jpg', link: '/cards' }
+        { src: 'sports2.jpg', link: '/sports', name: 'sports' },
+        { src: 'casino.jpg', link: '/casino', name: 'casino' },
+        { src: 'slots.jpg', link: '/slots', name: 'slots' },
+        { src: 'lottery.jpg', link: '/lottery', name: 'lottery' },
+        { src: 'fishing.jpg', link: '/fishing', name: 'fishing' },
+        { src: 'cards.jpg', link: '/cards', name: 'cards' }
       ],
       jackpotPrize: '1501480'
     }

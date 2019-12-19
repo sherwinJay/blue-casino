@@ -7,7 +7,10 @@
         data-aos="fade-up"
         data-aos-delay="500"
         data-aos-once="true">
-        <img :src="game.gameImg"/>
+        <img
+          :src="game.gameImg"
+          :alt="game.gName"
+        />
         <div :class="`game-info ${game.gameVendor}`">
           <span
             class="game-name">

@@ -87,7 +87,7 @@ export default {
   beforeMount () {
     window.addEventListener('scroll', () => {
       this.loadMore = this.bottomPage()
-    })
+    }, { passive: true })
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.bottomPage)
