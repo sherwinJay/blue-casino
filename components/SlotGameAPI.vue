@@ -21,13 +21,15 @@
         :categories="this.categories"
         :activeCategory="this.currCategory"
         :switchCategory="this.switchCategory"/>
-      <div class="search-game">
+      <form class="search-game">
         <!-- search here -->
-        <input
-          type="text"
-          placeholder="search..."
-          v-model="inputVal"/>
-      </div>
+        <label>
+          <input
+            type="text"
+            placeholder="search..."
+            v-model="inputVal"/>
+        </label>
+      </form>
     </div>
     <div class="game-container-wrapper">
       <div
@@ -90,7 +92,7 @@ export default {
     }, { passive: true })
   },
   beforeDestroy () {
-    window.removeEventListener('scroll', this.bottomPage)
+    window.removeEventListener('scroll', this.bottomPage, { passive: true })
   },
   methods: {
     // get data from api

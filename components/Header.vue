@@ -1,25 +1,35 @@
 <template>
   <div class="header-container">
     <header>
-      <div class="row">
-        <div class="col-md-4">
-          <h1 class="logo">
-            <img src="/images/Logo.png">
-          </h1>
-        </div>
-        <div class="col-md-8 form-container">
-          <form>
-            <input type="text" placeholder="username">
-            <input type="password" placeholder="password">
-            <button>Login</button>
-            <button class="register-btn">Register</button>
-          </form>
-        </div>
+      <div class="menu-wrapper">
+        <a href="#" class="menu">
+          <img src="/images/sideNav/menu.svg" alt="menu">
+        </a>
+      </div>
+      <div class="logo-wrapper">
+        <h1 class="logo">
+          <img src="/images/Logo.png" alt="logo">
+        </h1>
+      </div>
+      <div class="form-container">
+        <a href="#" class="user-mob">
+          <img src="/images/user-silhouette.svg" alt="user">
+        </a>
+        <form>
+          <label><input type="text" placeholder="username"></label>
+          <label><input type="password" placeholder="password"></label>
+          <button>Login</button>
+          <button class="register-btn">Register</button>
+        </form>
       </div>
     </header>
   </div>
 </template>
 <style scoped>
+.header-container header .form-container .user-mob,
+.menu-wrapper{
+  display: none;
+}
 .header-container{
     position: relative;
     min-height: 63px;
@@ -33,12 +43,24 @@
     left: 0;
     width: 100%;
     z-index: 10;
-
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+}
+.header-container header .logo-wrapper{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-items: start;
+  align-items: center;
+}
+.header-container header .form-container{
+  justify-items: end;
 }
 .header-container header .logo{
     font-size: 28px;
     font-weight: bold;
     color: #fff;
+    display: grid;
 }
 .header-container header form{
   display: flex;
@@ -72,6 +94,33 @@ background-image: linear-gradient(to bottom right, #afafaf 15%, #efefef 50%, #ae
 @media(max-width: 1120px){
   .header-container header{
     padding: 5px 40px;
+  }
+  .menu-wrapper{
+    display: block;
+  }
+  .form-container form{
+    display: none !important;
+  }
+  .header-container header .menu-wrapper{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    justify-items: start;
+    align-items: center;
+  }
+  .header-container header .form-container .user-mob img,
+  .header-container header .menu-wrapper img{
+    width: 30px;
+  }
+  .header-container header .logo-wrapper{
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+  .header-container header .logo{
+    justify-items: center;
+  }
+  .header-container header .form-container .user-mob{
+    display: grid;
+    justify-items: end;
   }
 }
 </style>
