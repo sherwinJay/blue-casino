@@ -3,10 +3,7 @@
       <div
         class="game-slot-container"
         v-for="(game, idx) in filterGames"
-        :key="idx"
-        data-aos="fade-up"
-        data-aos-delay="500"
-        data-aos-once="true">
+        :key="idx">
         <img
           :src="game.gameImg"
           :alt="game.gName"
@@ -50,10 +47,16 @@ export default {
     slotGames () {
       const game = this.gameData
       const newArr = []
+      // const topGames = [
+      //   // playtech
+      //   'pmn', 'grbjp', 'qnw', 'bob', 'fkmj',
+      //   // pragmatic
+      //   'vs25journey', 'cs5moneyroll', 'vs243fortseren', 'vs20sbxmas', 'vs20aladdinsorc'
+      // ]
       if (game === null || game === undefined) {
         return newArr
       } else {
-        game.map((idx) => {
+        game.map((idx, j) => {
           // rename game provider code for img path
         //   const getImageFolder = (provider) => {
         //     if (provider === 'T1PT') {
@@ -162,6 +165,27 @@ export default {
             }
           }
           // create new game list data
+          // if (topGames[j] === idx.game_id_desktop) {
+          // const topGamesArr = []
+
+          // topGamesArr.push({
+          //   gameVendor: idx.provider_code,
+          //   game_name: gName,
+          //   game_url: `${gImgPath}${idx.game_id_desktop}`,
+          //   gameImg: this.langCN ? idx.image_path.cn : idx.image_path.en,
+          //   game_link: {
+          //     real: `${getGameLinkReal(game[0].provider_code, idx.game_id_desktop, idx.game_type_code)}`,
+          //     trial: `${getGameLinkTrial(game[0].provider_code, idx.game_id_desktop, idx.game_type_code)}`
+          //   },
+          //   is_flash: ``,
+          //   is_html5: ``,
+          //   is_mobile: ``,
+          //   category: ``,
+          //   gameCode: idx.game_type_code,
+          //   realBtn: this.langCN ? '开始游戏' : 'real',
+          //   demoBtn: vendorNoDemo() ? '' : this.langCN ? '免费试玩' : 'trial'
+          // })
+
           newArr.push({
             gameVendor: idx.provider_code,
             game_name: gName,
@@ -177,10 +201,15 @@ export default {
             category: ``,
             gameCode: idx.game_type_code,
             realBtn: this.langCN ? '开始游戏' : 'real',
-            demoBtn: vendorNoDemo() ? '' : this.langCN ? '免费试玩' : 'trial'
+            demoBtn: vendorNoDemo() ? '' : this.langCN ? '免费试玩' : 'trial',
+            uniqueCode: idx.game_id_desktop
           })
+          // }
         })
-        console.log(newArr)
+        // const newGameList = newArr.filter((game) => {
+        //   return topGames.includes(game.uniqueCode)
+        // })
+        // console.log(newGameList)
         return newArr
       }
     },

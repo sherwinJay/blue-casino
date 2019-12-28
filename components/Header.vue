@@ -1,11 +1,11 @@
 <template>
   <div class="header-container">
     <header>
-      <div class="menu-wrapper">
+      <!-- <div class="menu-wrapper">
         <a href="#" class="menu">
           <img src="/images/sideNav/menu.svg" alt="menu">
         </a>
-      </div>
+      </div> -->
       <div class="logo-wrapper">
         <h1 class="logo">
           <img src="/images/Logo.png" alt="logo">

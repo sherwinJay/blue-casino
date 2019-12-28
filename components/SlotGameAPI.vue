@@ -64,13 +64,19 @@ export default {
   data () {
     return {
       currVendor: '1002',
-      currCategory: 'slots',
+      currCategory: '',
       games: [],
+      topGames: [
+        // playtech
+        'pmn', 'grbjp', 'qnw', 'bob', 'fkmj',
+        // pragmatic
+        'vs25journey', 'cs5moneyroll', 'vs243fortseren', 'vs20sbxmas', 'vs20aladdinsorc'
+      ],
       gameVendor: [
         { name: 'Playtech', id: 1002 },
         { name: 'Pragmatic', id: 1011 },
-        { name: 'Top Trend Gaming', id: 1012 },
-        { name: 'Play N Go', id: 1010 }
+        { name: 'Top Trend Gaming', id: 1012 }
+        // { name: 'Play N Go', id: 1010 }
         // { name: 'Microgaming', id: 5213 },
         // { name: 'Jumbo', id: 1018 }
       ],
@@ -105,6 +111,7 @@ export default {
           const showGames = result.game_list.filter((idx) => {
             return (idx.in_flash === '1' || idx.in_html5 === '1') && idx.game_type_code !== 'unknown'
           })
+          // or place the top games funtion here, before slicing the showGames
           const append = showGames.slice(gameLength, (gameLength + maxItems))
           this.games = this.games.concat(append)
           if (this.bottomPage()) {
@@ -113,6 +120,9 @@ export default {
           }
           console.log(id)
         })
+    },
+    getTopGames (id, category, gameLength, maxItems) {
+      // put function here
     },
     bottomPage () {
       const scrollY = window.scrollY
@@ -134,7 +144,7 @@ export default {
       // empty the games
       this.games = []
       // default category to slots everytime vendor item change
-      this.currCategory = 'slots'
+      this.currCategory = ''
       this.loading = true
       // get current vendor-id
       this.currVendor = e.target.getAttribute('data-id')

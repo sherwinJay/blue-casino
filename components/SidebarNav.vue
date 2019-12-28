@@ -1,26 +1,35 @@
 <template>
-  <div class="sidebar-container">
-    <div class="sidebar-nav">
-      <div class="gm-lang">
-      <ul>
-        <li>EN</li>
-        <!-- <li>EN</li> -->
-      </ul>
-      <!-- <select>
-        <option value="0">CN</option>
-        <option value="1">EN</option>
-      </select> -->
+  <div>
+    <div class="sidebar-container-mob">
+      <div class="menu-wrapper">
+        <a href="#" class="menu">
+          <img src="/images/sideNav/menu.svg" alt="menu">
+        </a>
+      </div>
     </div>
-      <ul class="nav">
-        <li
-          v-for="(nav, idx) in navItems"
-          :key="idx"
-          :class="nav.className">
-          <nuxt-link :to="nav.link">
-            <span>{{nav.name}}</span>
-          </nuxt-link>
-        </li>
-      </ul>
+    <div class="sidebar-container">
+      <div class="sidebar-nav">
+        <div class="gm-lang">
+        <ul>
+          <li>EN</li>
+          <!-- <li>EN</li> -->
+        </ul>
+        <!-- <select>
+          <option value="0">CN</option>
+          <option value="1">EN</option>
+        </select> -->
+      </div>
+        <ul class="nav">
+          <li
+            v-for="(nav, idx) in navItems"
+            :key="idx"
+            :class="nav.className">
+            <nuxt-link :to="nav.link">
+              <span>{{nav.name}}</span>
+            </nuxt-link>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -44,6 +53,15 @@ export default {
 }
 </script>
 <style scoped>
+.sidebar-container-mob{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 0 5px 40px;
+  height: 70px;
+  display: none;
+  z-index: 11;
+}
 .sidebar-container{
     box-shadow: #050505 1px 20px 7px;
     position: fixed;
@@ -135,6 +153,13 @@ ul li{
 @media(max-width: 1120px){
   .sidebar-container{
     display: none;
+  }
+  .sidebar-container-mob{
+    display: grid !important;
+    align-items: center;
+  }
+  .menu-wrapper img{
+    width: 30px;
   }
 }
 </style>

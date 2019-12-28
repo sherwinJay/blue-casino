@@ -21,6 +21,16 @@ export default {
     'categories',
     'switchCategory'
   ],
+  data () {
+    return {
+      defaultCategories: [{
+        category: {
+          categoryName: 'all',
+          categoryRaw: ''
+        }
+      }]
+    }
+  },
   computed: {
     createCategories () {
       const newCategories = []
@@ -63,7 +73,9 @@ export default {
           })
         }
       })
-      return newCategories
+      console.log(newCategories)
+      return this.defaultCategories.concat(newCategories)
+      // return newCategories
     }
   }
 }
