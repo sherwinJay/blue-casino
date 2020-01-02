@@ -68,4 +68,9 @@
     text-align: center;
     color: #9caabd;
   }
+  @media(max-width: 1120px){
+    footer{
+    padding: 40px 0;
+    }
+  }
 </style>

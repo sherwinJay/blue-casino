@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import Slots from '~/components/SlotGameAPI'
+import Slots from '~/components/slots-api/SlotGameAPI'
 export default {
   components: {
     Slots

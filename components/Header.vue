@@ -123,4 +123,16 @@ background-image: linear-gradient(to bottom right, #afafaf 15%, #efefef 50%, #ae
     justify-items: end;
   }
 }
+@media(max-width: 500px){
+  .header-container header{
+    padding: 5px 20px;
+  }
+  .header-container{
+    min-height: 50px;
+    margin-left: 0;
+  }
+  .logo img{
+    height: 40px;
+  }
+}
 </style>
