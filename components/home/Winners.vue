@@ -84,4 +84,9 @@ p.win_game {
     overflow: hidden !important;
   }
 }
+@media(max-width: 500px){
+  .win_item .row{
+    flex-wrap: unset;
+  }
+}
 </style>

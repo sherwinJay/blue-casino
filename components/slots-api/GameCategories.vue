@@ -3,12 +3,12 @@
     <ul>
       <li
         v-for="ct in createCategories"
-        :key="ct.category.categoryRaw">
+        :key="ct.categoryRaw">
         <button
-          :class="`category-${ct.category.categoryName} ${ct.category.categoryRaw === activeCategory ? 'active' : ''}`"
-          :data-category="ct.category.categoryRaw"
+          :class="`category-${ct.categoryName} ${ct.categoryRaw === activeCategory ? 'active' : ''}`"
+          :data-category="ct.categoryRaw"
           @click="switchCategory">
-          {{ ct.category.categoryName }}
+          {{ ct.categoryName }}
         </button>
       </li>
     </ul>
@@ -23,12 +23,10 @@ export default {
   ],
   data () {
     return {
-      defaultCategories: [{
-        category: {
-          categoryName: 'all',
-          categoryRaw: ''
-        }
-      }]
+      defaultCategories: [
+        { categoryName: 'all', categoryRaw: '' },
+        { categoryName: 'slots', categoryRaw: 'slots' }
+      ]
     }
   },
   computed: {
@@ -47,7 +45,7 @@ export default {
 
       // edit category name here
       this.categories.map((category) => {
-        if (category === null) {
+        if (category === null || category === 'slots') {
           return false
         } else {
           const editCategoryName = () => {
@@ -68,14 +66,12 @@ export default {
             }
           }
           return newCategories.push({
-            category: {
-              categoryName: editCategoryName(),
-              categoryRaw: category
-            }
+            categoryName: editCategoryName(),
+            categoryRaw: category
           })
         }
       })
-      // console.log(newCategories)
+      console.log(this.defaultCategories.concat(newCategories))
       return this.defaultCategories.concat(newCategories)
     }
   }

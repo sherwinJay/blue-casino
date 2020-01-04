@@ -58,17 +58,11 @@ export default {
     slotGames () {
       const game = this.gameData
       const gameArr = []
-      // const topGames = [
-      //   // playtech
-      //   'pmn', 'grbjp', 'qnw', 'bob', 'fkmj',
-      //   // pragmatic
-      //   'vs25journey', 'cs5moneyroll', 'vs243fortseren', 'vs20sbxmas', 'vs20aladdinsorc'
-      // ]
-      // return an empty array if gameData is null or undefined
       if (game === null || game === undefined) {
         return gameArr
       } else {
         game.map((idx, j) => {
+          // GET IMAGE PATH
           // rename game provider code for img path
         //   const getImageFolder = (provider) => {
         //     if (provider === 'T1PT') {
@@ -84,10 +78,11 @@ export default {
         //     }
         //   }
 
-          // modify gamelink
+          // MODIFY GAME LINK VARIABLES
           const getLaunchUrl1 = String(idx.game_launch_url.web).split('/')[0]
           const getLaunchUrl2 = String(idx.game_launch_url.web).split('/')[1]
           const getGameLinkReal = (gameProvider, gameCode, gameType, gameMode, gameCodeOther) => {
+            // CREATE GAMELINK
             // Use provider_code when comparing with gameProvider
             if (gameProvider === 'T1PT') {
               return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}`
@@ -125,6 +120,7 @@ export default {
           }
 
           const getGameLinkTrial = (gameProvider, gameCode, gameType, gameMode, gameCodeOther) => {
+            // CREATE GAMELINK
             // Use provider_code when comparing with gameProvider
             if (gameProvider === 'T1PT') {
               return `/${getLaunchUrl1}/${getLaunchUrl2}/${gameCode}`
@@ -176,6 +172,7 @@ export default {
               }
             }
           }
+          // CREATE CUSTOM GAME INFORMATION
           gameArr.push({
             gameVendor: idx.provider_code,
             game_name: gName,
@@ -217,7 +214,7 @@ export default {
     from {transform: scale(0.8); opacity: 0;}
     to {transform: scale(1); opacity: 1;}
 }
-/*  */
+/* default css animation end here */
 .game-container{
   display: grid;
   grid-template-columns: repeat(6, 1fr);

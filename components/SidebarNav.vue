@@ -54,7 +54,7 @@ export default {
 </script>
 <style scoped>
 .sidebar-container-mob{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   padding: 5px 0 5px 40px;
@@ -160,6 +160,13 @@ ul li{
   }
   .menu-wrapper img{
     width: 30px;
+  }
+}
+@media(max-width: 500px){
+  .sidebar-container-mob{
+    top: -7px;
+    left: 0;
+    padding: 5px 0 5px 20px;
   }
 }
 </style>

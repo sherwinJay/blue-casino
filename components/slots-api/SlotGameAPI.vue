@@ -35,14 +35,14 @@
       </form>
     </div>
     <div class="game-container-wrapper">
-      <!-- CHECKS IF PAGE IS LOADING; SHOW LOADING CIRCLE  -->
+      <!-- SHOW LOADING CIRCLE WHEN PAGE LOADS  -->
       <div
         v-if="loading"
         id="loading"
         class="animated">
         <div class="circle"></div>
       </div>
-      <!-- CHECKS IF PAGE IS NOT LOADING; SHOWS GAME LIST  -->
+      <!-- SHOWS GAME LIST AFTER PAGE LOADS  -->
       <div
         class="load-more"
         v-if="!loading">
@@ -70,7 +70,7 @@ export default {
     return {
       // load default game provider
       currVendor: '1002',
-      // '' = loads all games
+      // set default to '' (all)
       currCategory: '',
       games: [],
       // placed all top game request here
@@ -122,33 +122,33 @@ export default {
         .then(response => response.json())
         .then((result) => {
           this.loading = false
+          // filter games
           const showGames = result.game_list.filter((idx) => {
             return (idx.in_flash === '1' || idx.in_html5 === '1') && (idx.game_type_code !== 'unknown' && idx.game_type_code !== null)
           })
-          // or place the top games funtion here, before slicing the showGames
           let append
-          // optimize loading getTopGames
+          // filter top games
           const getTopGames = showGames.filter((game, j) => {
             return this.topGames.includes(game.game_id_desktop)
-            // return this.topGames[j] === game.game_id_desktop
           })
+          // add more games when hit bottom of page
+          const addMoreGames = () => {
+            if (this.bottomPage()) {
+              this.loadMore = false
+              this.games.concat(append)
+            }
+          }
           if (getTopGames.length > 0) {
             const normalGames = showGames.filter((game) => {
               return !this.topGames.includes(game.game_id_desktop)
             })
             append = getTopGames.concat(normalGames).slice(gameLength, (gameLength + maxItems))
             this.games = this.games.concat(append)
-            if (this.bottomPage()) {
-              this.loadMore = false
-              this.games.concat(append)
-            }
+            addMoreGames()
           } else {
             append = showGames.slice(gameLength, (gameLength + maxItems))
             this.games = this.games.concat(append)
-            if (this.bottomPage()) {
-              this.loadMore = false
-              this.games.concat(append)
-            }
+            addMoreGames()
           }
         })
     },
@@ -189,7 +189,7 @@ export default {
   },
   watch: {
     loadMore (bottom) {
-      if (bottom) {
+      if (bottom && (this.games.length > 0)) {
         this.getGames(this.currVendor, this.currCategory, this.games.length, this.maxItem)
       }
     }

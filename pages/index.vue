@@ -413,5 +413,72 @@ export default {
   .gm-day-wrapper img{
     max-width: 170%;
   }
+  footer img{
+    width: 320px;
+  }
+}
+@media(max-width: 500px){
+  .page-container{
+    padding: 50px 20px;
+  }
+  .game-grid-container {
+    display: grid;
+    grid: 90px 90px 90px 90px 90px 90px 90px / repeat(3, 1fr);
+    grid-gap: 14px;
+    min-height: 0;
+    min-width: 0;
+  }
+  .game-grid-container > div:first-child {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    min-width: 0;
+    overflow: hidden;
+    width: 100%;
+  }
+  .thumbnail img {
+    max-width: 220%;
+  }
+  .jackpot-container p {
+    font-size: 26px;
+    line-height: 35px;
+  }
+  .promo-banner-wrapper{
+    min-height: 150px;
+    padding: 60px 0;
+    text-align: center;
+  }
+  .promo-banner-wrapper h3 {
+    font-size: 32px;
+  }
+  .promo-banner-wrapper p {
+    margin: 10px 0 25px;
+    font-size: 15px;
+  }
+  .home-content{
+    margin-top: 35px;
+    display: grid;
+    grid: 290px 430px 265px / repeat(8, 1fr);
+    grid-gap: 15px;
+  }
+  .home-content h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .game-pages {
+    display: grid;
+    grid: 110px 110px 110px / repeat(2, 1fr);
+    grid-gap: 15px;
+  }
+  .bonus-container,
+  .more-games-wrapper,
+  .game-winners-container{
+    grid-column-start: 1;
+    grid-column-end: 9;
+  }
+  footer img{
+    width: 320px;
+  }
 }
 </style>
