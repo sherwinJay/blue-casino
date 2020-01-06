@@ -2,8 +2,8 @@
   <div class="game-category">
     <ul>
       <li
-        v-for="ct in createCategories"
-        :key="ct.categoryRaw">
+        v-for="(ct, idx) in createCategories"
+        :key="idx">
         <button
           :class="`category-${ct.categoryName} ${ct.categoryRaw === activeCategory ? 'active' : ''}`"
           :data-category="ct.categoryRaw"
@@ -25,6 +25,7 @@ export default {
     return {
       defaultCategories: [
         { categoryName: 'all', categoryRaw: '' },
+        { categoryName: 'hot', categoryRaw: ' ' },
         { categoryName: 'slots', categoryRaw: 'slots' }
       ]
     }

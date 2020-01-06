@@ -124,27 +124,34 @@ export default {
           this.loading = false
           // filter games
           const showGames = result.game_list.filter((idx) => {
-            return (idx.in_flash === '1' || idx.in_html5 === '1') && (idx.game_type_code !== 'unknown' && idx.game_type_code !== null)
+            return ((idx.in_flash === '1' || idx.in_html5 === '1')) && (idx.game_type_code !== 'unknown' && idx.game_type_code !== null)
           })
           let append
           // filter top games
           const getTopGames = showGames.filter((game, j) => {
             return this.topGames.includes(game.game_id_desktop)
           })
-          // add more games when hit bottom of page
           const addMoreGames = () => {
             if (this.bottomPage()) {
               this.loadMore = false
               this.games.concat(append)
             }
           }
+          // add more games when scroll hit the bottom of page
           if (getTopGames.length > 0) {
-            const normalGames = showGames.filter((game) => {
-              return !this.topGames.includes(game.game_id_desktop)
-            })
-            append = getTopGames.concat(normalGames).slice(gameLength, (gameLength + maxItems))
-            this.games = this.games.concat(append)
-            addMoreGames()
+            // remove the top games to avoid duplicate games
+            if (category === ' ') {
+              append = getTopGames.slice(gameLength, (gameLength + maxItems))
+              this.games = this.games.concat(append)
+              addMoreGames()
+            } else {
+              const normalGames = showGames.filter((game) => {
+                return !this.topGames.includes(game.game_id_desktop)
+              })
+              append = getTopGames.concat(normalGames).slice(gameLength, (gameLength + maxItems))
+              this.games = this.games.concat(append)
+              addMoreGames()
+            }
           } else {
             append = showGames.slice(gameLength, (gameLength + maxItems))
             this.games = this.games.concat(append)

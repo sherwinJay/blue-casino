@@ -40,4 +40,11 @@ export default {
   max-width: 100%;
   border-radius: 10px;
 }
+@media(max-width: 500px){
+  .casino-wrapper{
+    display: grid;
+    grid: repeat(3, 1fr) / repeat(1, 1fr);
+    grid-gap: 15px;
+  }
+}
 </style>

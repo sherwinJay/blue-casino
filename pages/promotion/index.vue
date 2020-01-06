@@ -68,4 +68,12 @@ export default {
   display: inline-block;
   font-size: 14px;
 }
+@media(max-width: 500px){
+  .promo{
+    display: grid;
+    grid: repeat(6, 1fr) / repeat(1, 1fr);
+    grid-gap: 20px;
+    margin-top: 45px;
+  }
+}
 </style>

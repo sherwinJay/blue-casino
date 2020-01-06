@@ -102,7 +102,11 @@ input{
 		padding: 50px 40px;
 	}
 }
-
+@media(max-width: 500px){
+	.page-container{
+		padding: 50px 20px;
+	}
+}
 /* Common Styles */
 .game_overlay {
 	position: absolute;

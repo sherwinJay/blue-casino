@@ -393,7 +393,7 @@ export default {
 @media(max-width: 1120px){
   .game-grid-container{
     display: grid;
-    grid: 120px 120px 120px 120px/ repeat(5, 1fr);
+    grid: repeat(4, 120px)/ repeat(5, 1fr);
     grid-gap: 15px;
     min-height: 0;
     min-width: 0;
@@ -418,19 +418,16 @@ export default {
   }
 }
 @media(max-width: 500px){
-  .page-container{
-    padding: 50px 20px;
-  }
   .game-grid-container {
     display: grid;
-    grid: 90px 90px 90px 90px 90px 90px 90px / repeat(3, 1fr);
+    grid: repeat(7, 70px) / repeat(3, 1fr);
     grid-gap: 14px;
     min-height: 0;
     min-width: 0;
   }
   .game-grid-container > div:first-child {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 3;
     min-width: 0;
@@ -438,7 +435,7 @@ export default {
     width: 100%;
   }
   .thumbnail img {
-    max-width: 220%;
+    max-width: 175%;
   }
   .jackpot-container p {
     font-size: 26px;
@@ -468,7 +465,7 @@ export default {
   }
   .game-pages {
     display: grid;
-    grid: 110px 110px 110px / repeat(2, 1fr);
+    grid: repeat(3, 110px) / repeat(2, 1fr);
     grid-gap: 15px;
   }
   .bonus-container,

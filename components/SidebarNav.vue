@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="sidebar-container-mob">
+    <div
+      class="sidebar-container-mob"
+      @click="showSideMenu">
       <div class="menu-wrapper">
         <a href="#" class="menu">
           <img src="/images/sideNav/menu.svg" alt="menu">
@@ -10,21 +12,28 @@
     <div class="sidebar-container">
       <div class="sidebar-nav">
         <div class="gm-lang">
-        <ul>
-          <li>EN</li>
-          <!-- <li>EN</li> -->
-        </ul>
+          <ul>
+            <li>EN</li>
+            <!-- <li>EN</li> -->
+          </ul>
         <!-- <select>
           <option value="0">CN</option>
           <option value="1">EN</option>
         </select> -->
-      </div>
+        </div>
+        <div
+          class="close-btn"
+          @click="hideSideMenu">
+          <span><img src="/images/close.svg" alt="close-btn"></span>
+        </div>
         <ul class="nav">
           <li
             v-for="(nav, idx) in navItems"
             :key="idx"
-            :class="nav.className">
-            <nuxt-link :to="nav.link">
+            :class="nav.className"
+            @click="hideSideMenu">
+            <nuxt-link
+              :to="nav.link">
               <span>{{nav.name}}</span>
             </nuxt-link>
           </li>
@@ -49,10 +58,23 @@ export default {
         { link: '/vip', className: 'nav-vip', name: 'VIP' }
       ]
     }
+  },
+  methods: {
+    showSideMenu () {
+      const sideMenuIcon = document.querySelector('.sidebar-container')
+      return sideMenuIcon.classList.add('show')
+    },
+    hideSideMenu () {
+      const sideMenuIcon = document.querySelector('.sidebar-container')
+      return sideMenuIcon.classList.remove('show')
+    }
   }
 }
 </script>
 <style scoped>
+.sidebar-container .close-btn{
+  display: none;
+}
 .sidebar-container-mob{
   position: fixed;
   top: 0;
@@ -153,6 +175,18 @@ ul li{
 @media(max-width: 1120px){
   .sidebar-container{
     display: none;
+  }
+  .sidebar-container.show,
+  .sidebar-container.show .close-btn{
+    display: block !important;
+  }
+  .sidebar-container.show .close-btn{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+  .sidebar-container.show .close-btn img{
+    width: 18px;
   }
   .sidebar-container-mob{
     display: grid !important;
