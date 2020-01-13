@@ -7,7 +7,11 @@
 </template>
 <script>
 export default {
-
+  head () {
+    return {
+      titleTemplate: '%s | Lottery'
+    }
+  }
 }
 </script>
 <style scoped>

@@ -7,7 +7,11 @@
 </template>
 <script>
 export default {
-
+  head () {
+    return {
+      titleTemplate: '%s | Fishing'
+    }
+  }
 }
 </script>
 <style scoped>

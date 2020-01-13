@@ -57,11 +57,11 @@ export default {
   computed: {
     slotGames () {
       const game = this.gameData
-      const gameArr = []
+      let gameArr = []
       if (game === null || game === undefined) {
         return gameArr
       } else {
-        game.map((idx, j) => {
+        gameArr = game.map((idx, j) => {
           // GET IMAGE PATH
           // rename game provider code for img path
         //   const getImageFolder = (provider) => {
@@ -173,7 +173,7 @@ export default {
             }
           }
           // CREATE CUSTOM GAME INFORMATION
-          gameArr.push({
+          return {
             gameVendor: idx.provider_code,
             game_name: gName,
             game_url: `${gImgPath}${idx.game_id_desktop}`,
@@ -190,10 +190,10 @@ export default {
             realBtn: this.langCN ? '开始游戏' : 'real',
             demoBtn: vendorNoDemo() ? '' : this.langCN ? '免费试玩' : 'trial',
             uniqueCode: idx.game_id_desktop
-          })
+          }
         })
-        return gameArr
       }
+      return gameArr
     },
     filterGames () {
       return this.slotGames.filter((game) => {

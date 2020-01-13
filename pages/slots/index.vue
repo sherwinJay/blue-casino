@@ -8,6 +8,11 @@
 <script>
 import Slots from '~/components/slots-api/SlotGameAPI'
 export default {
+  head () {
+    return {
+      titleTemplate: '%s | Slots'
+    }
+  },
   components: {
     Slots
   }

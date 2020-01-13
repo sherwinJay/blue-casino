@@ -14,6 +14,11 @@
 </template>
 <script>
 export default {
+  head () {
+    return {
+      titleTemplate: '%s | Casino'
+    }
+  },
   data () {
     return {
       promotions: [

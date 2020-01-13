@@ -35,7 +35,12 @@
       </form>
     </div>
     <div class="game-container-wrapper">
-      <!-- SHOW LOADING CIRCLE WHEN PAGE LOADS  -->
+      <!-- CHANGE LANGUAGE -->
+      <div class="lang-btn-wrapper">
+        <button @click="enBtn">EN</button>
+        <button @click="cnBtn">CN</button>
+      </div>
+       <!-- SHOW LOADING CIRCLE WHEN PAGE LOADS  -->
       <div
         v-if="loading"
         id="loading"
@@ -69,7 +74,7 @@ export default {
   data () {
     return {
       // load default game provider
-      currVendor: '1002',
+      currVendor: '5587',
       // set default to '' (all)
       currCategory: '',
       games: [],
@@ -82,7 +87,7 @@ export default {
       ],
       // place game provider info here
       gameVendor: [
-        { name: 'Playtech', id: 1002 },
+        { name: 'Playtech', id: 5587 },
         { name: 'Pragmatic', id: 1011 },
         { name: 'Top Trend Gaming', id: 1012 },
         { name: 'Play N Go', id: 1010 }
@@ -123,20 +128,24 @@ export default {
         .then((result) => {
           this.loading = false
           // filter games
-          const showGames = result.game_list.filter((idx) => {
-            return ((idx.in_flash === '1' || idx.in_html5 === '1')) && (idx.game_type_code !== 'unknown' && idx.game_type_code !== null)
-          })
-          let append
-          // filter top games
-          const getTopGames = showGames.filter((game, j) => {
-            return this.topGames.includes(game.game_id_desktop)
-          })
           const addMoreGames = () => {
             if (this.bottomPage()) {
               this.loadMore = false
               this.games.concat(append)
             }
           }
+          let append
+          // for (const key in result.game_list) {
+          //   console.table(result.game_list[key])
+          // }
+          const showGames = result.game_list.filter((idx) => {
+            return ((idx.in_flash === '1' || idx.in_html5 === '1')) && (idx.game_type_code !== 'unknown' && idx.game_type_code !== null)
+          })
+          // filter top games
+          const getTopGames = showGames.filter((game, j) => {
+            return this.topGames.includes(game.game_id_desktop)
+          })
+          console.time('')
           // add more games when scroll hit the bottom of page
           if (getTopGames.length > 0) {
             // remove the top games to avoid duplicate games
@@ -157,6 +166,7 @@ export default {
             this.games = this.games.concat(append)
             addMoreGames()
           }
+          console.timeEnd('')
         })
     },
     bottomPage () {
@@ -192,10 +202,17 @@ export default {
       this.loading = true
       this.currCategory = e.target.getAttribute('data-category')
       this.getGames(this.currVendor, this.currCategory, 0, this.maxItem)
+    },
+    enBtn () {
+      this.langCN = false
+    },
+    cnBtn () {
+      this.langCN = true
     }
   },
   watch: {
     loadMore (bottom) {
+      // load if scroll hits bottom AND if games is loaded
       if (bottom && (this.games.length > 0)) {
         this.getGames(this.currVendor, this.currCategory, this.games.length, this.maxItem)
       }
@@ -237,6 +254,25 @@ border-top-color: #ccc;
 }
 #loading.loaded {
   display: none;
+}
+.lang-btn-wrapper{
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+}
+.lang-btn-wrapper button{
+  margin: 3px 0;
+  padding: 10px;
+  background-image: linear-gradient(to bottom right, #e8b238 15%, #fdea7f 50%, #e8b238 90%) !important;
+  outline: transparent;
+  border: #e8b238;
+  border-radius: 7px;
+}
+.lang-btn-wrapper button.active{
+  text-decoration: #222;
 }
 .category-wrapper{
   display: grid;
@@ -289,7 +325,7 @@ border-top-color: #ccc;
 .game-vendor li a.active{
   filter: grayscale(0);
 }
-.game-vendor li a#game-1002{
+.game-vendor li a#game-5587{
   background-position: -1439px;
   width: 125px;
 }

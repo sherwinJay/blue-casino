@@ -21,6 +21,11 @@
 </template>
 <script>
 export default {
+  head () {
+    return {
+      titleTemplate: '%s | Promotion'
+    }
+  },
   data () {
     return {
       promotions: [

@@ -72,7 +72,7 @@ export default {
           })
         }
       })
-      console.log(this.defaultCategories.concat(newCategories))
+      // console.table(this.defaultCategories.concat(newCategories))
       return this.defaultCategories.concat(newCategories)
     }
   }
